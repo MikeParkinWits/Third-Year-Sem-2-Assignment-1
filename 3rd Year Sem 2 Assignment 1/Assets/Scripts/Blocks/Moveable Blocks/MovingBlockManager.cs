@@ -48,13 +48,13 @@ public class MovingBlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 playerController.canMoveGlobalCount++;
-                Debug.Log("Hello");
+                //Debug.Log("Hello");
                 MovementHorizontal(-playerController.moveAmount);
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                Debug.Log("Hello");
+                //Debug.Log("Hello");
                 playerController.canMoveGlobalCount++;
                 MovementHorizontal(playerController.moveAmount);
             }
@@ -63,14 +63,14 @@ public class MovingBlockManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                Debug.Log("Hello");
+                //Debug.Log("Hello");
                 playerController.canMoveGlobalCount++;
                 MovementVertical(playerController.moveAmount);
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                Debug.Log("Hello");
+                //Debug.Log("Hello");
                 playerController.canMoveGlobalCount++;
                 MovementVertical(-playerController.moveAmount);
             }
@@ -87,7 +87,7 @@ public class MovingBlockManager : MonoBehaviour
             {
                 //moveToPoint.position += new Vector3(moveAmount, 0f, 0f);
 
-                Debug.Log("CAN MOVE");
+                //Debug.Log("CAN MOVE");
 
                 //playerController.canMoveGlobal = true;
                 canMove = true;
@@ -96,7 +96,7 @@ public class MovingBlockManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("CANNOT MOVE");
+            //Debug.Log("CANNOT MOVE");
 
             //playerController.canMoveGlobal = false;
             canMove = false;
@@ -119,7 +119,7 @@ public class MovingBlockManager : MonoBehaviour
             {
                 //moveToPoint.position += new Vector3(0f, moveAmount, 0f);
 
-                Debug.Log("CAN MOVE");
+                //Debug.Log("CAN MOVE");
 
                 //rightPlayAudio = true;
 
@@ -129,7 +129,7 @@ public class MovingBlockManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("CANNOT MOVE");
+            //Debug.Log("CANNOT MOVE");
 
             //playerController.canMoveGlobal = false;
 
@@ -153,8 +153,9 @@ public class MovingBlockManager : MonoBehaviour
         {
             firstChild.parent = GameObject.FindGameObjectWithTag("Player").transform;
 
-            playerController.movingBlockArray.Remove(this.gameObject.GetComponent<MovingBlockManager>());
         }
+            playerController.movingBlockArray.Remove(this.gameObject.GetComponent<MovingBlockManager>());
+        
 
         Destroy(moveToPoint.gameObject);
 

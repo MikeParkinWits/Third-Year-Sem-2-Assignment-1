@@ -14,6 +14,9 @@ public class PlayerObserver : MonoBehaviour
 
     //public StarManager starManager;
 
+    public GoalManager goalManager;
+
+
     private void Start()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
@@ -23,6 +26,8 @@ public class PlayerObserver : MonoBehaviour
         //leftPlayerMoveTo = GameObject.Find("PlayerMoveTo").GetComponent<Transform>();
 
         //starManager = GameObject.Find("Game Manager").GetComponent<StarManager>();
+
+        goalManager = GameObject.Find("Goal").GetComponent<GoalManager>();
     }
 
     private void FixedUpdate()
@@ -38,6 +43,7 @@ public class PlayerObserver : MonoBehaviour
             else
             {
                 canMove = false;
+                goalManager.goalChecked = false;
             }
         }
 

@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     public Transform playerTrans;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         //starManager = GameObject.Find("Game Manager").GetComponent<StarManager>();
+
     }
 
     // Update is called once per frame
