@@ -32,14 +32,14 @@ public class MovingBlockController : MonoBehaviour
         {
             if (collision.tag == "Player" || collision.tag == "MovingBlock")
             {
-                parentTrans.parent = GameObject.FindGameObjectWithTag("Player").transform;
-                //parentTrans.parent = collision.transform;
+                //parentTrans.parent = GameObject.FindGameObjectWithTag("Player").transform;
+                parentTrans.parent = collision.transform;
                 playerController.canMoveGlobalTotal++;
 
                 movingBlockManager.attached = true;
                 playerController.movingBlockArray.Add(movingBlockManager);
 
-                this.gameObject.SetActive(false);
+                this.transform.parent.gameObject.SetActive(false);
             }
 
         }

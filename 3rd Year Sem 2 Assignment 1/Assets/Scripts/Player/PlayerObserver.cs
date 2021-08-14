@@ -27,14 +27,18 @@ public class PlayerObserver : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Vector3.Distance(playerTransform.position, playerMoveTo.position) == 0f
-                    && !GameManager.gamePaused)
+
+        if(playerTransform != null && playerMoveTo != null)
         {
-            canMove = true;
-        }
-        else
-        {
-            canMove = false;
+            if (Vector3.Distance(playerTransform.position, playerMoveTo.position) == 0f
+            && !GameManager.gamePaused)
+            {
+                canMove = true;
+            }
+            else
+            {
+                canMove = false;
+            }
         }
 
         /*
@@ -47,5 +51,7 @@ public class PlayerObserver : MonoBehaviour
             LeftPlayerController.leftPlayAudio = false;
         }
         */
+
+
     }
 }

@@ -45,11 +45,17 @@ public class PlayerController : MonoBehaviour
 
     public List<MovingBlockManager> movingBlockArray = new List<MovingBlockManager>();
 
+    int rotateValue = 0;
+
+    public Transform playerTrans;
+
     // Start is called before the first frame update
     void Start()
     {
 
-        movingBlockArray.Clear();
+        playerTrans = this.transform;
+
+        //movingBlockArray.Clear();
 
         canMoveGlobalCount = 0;
         canMoveGlobalTotal = 0;
@@ -74,7 +80,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, moveToPoint.position, moveSpeed * Time.deltaTime);
+        playerTrans.position = Vector3.MoveTowards(transform.position, moveToPoint.position, moveSpeed * Time.deltaTime);
 
         if (Physics2D.OverlapPoint(transform.position, slidingBlocks))
         {
@@ -88,6 +94,26 @@ public class PlayerController : MonoBehaviour
         if (playerObserver.canMove)
         {
             Movement();
+
+            //Rotation();
+        }
+    }
+
+    public void Rotation()
+    {
+
+        //MUST CHECK FOR WALL COLLISION, SAME WAY AS MOVEMENT
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (rotateValue > 360)
+            {
+                rotateValue = 0;
+            }
+
+            rotateValue += 90;
+
+            this.transform.eulerAngles = new Vector3(0, 0, rotateValue);
         }
     }
 
@@ -202,6 +228,48 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void DestroyBlock()
+    {
+
+        Transform firstChild = this.gameObject.transform.Find("Moving Block");
+
+        if (firstChild != null)
+        {
+            firstChild.gameObject.GetComponent<PlayerController>().enabled = true;
+
+            for (int i = 1; i < movingBlockArray.Count; i++)
+            {
+                firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray.Add(movingBlockArray[i]);
+            }
+
+            foreach (MovingBlockManager item in this.movingBlockArray)
+            {
+                print(item.name);
+            }
+
+            playerObserver.playerTransform = firstChild;
+
+            playerObserver.playerMoveTo = firstChild.gameObject.GetComponent<MovingBlockManager>().moveToPoint;
+
+            firstChild.gameObject.GetComponent<MovingBlockManager>().moveToPoint.gameObject.GetComponent<FollowScript>().enabled = false;
+
+            firstChild.parent = null;
+
+            firstChild.gameObject.name = "Player";
+            firstChild.gameObject.tag = "Player";
+
+            //firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray = this.gameObject.GetComponent<PlayerController>().movingBlockArray;
+
+            Debug.Log("LOST");
+        }
+
+        Destroy(moveToPoint.gameObject);
+
+        Destroy(this.gameObject);
+        //this.gameObject.GetComponent<PlayerController>().enabled = false;
+        
     }
 
     public void MovementHorizontal(float moveAmount)

@@ -143,4 +143,23 @@ public class MovingBlockManager : MonoBehaviour
         //MovingBlock(false, moveAmount);
     }
 
+    public void DestroyBlock()
+    {
+        //Transform firstChild = GameObject.Find("MovingBlock").transform.GetChild(0);
+
+        Transform firstChild = this.gameObject.transform.Find("Moving Block");
+
+        if (firstChild != null)
+        {
+            firstChild.parent = GameObject.FindGameObjectWithTag("Player").transform;
+
+            playerController.movingBlockArray.Remove(this.gameObject.GetComponent<MovingBlockManager>());
+        }
+
+        Destroy(moveToPoint.gameObject);
+
+        Destroy(this.gameObject);
+
+    }
+
 }
