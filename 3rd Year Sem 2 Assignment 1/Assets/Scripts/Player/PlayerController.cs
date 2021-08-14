@@ -39,9 +39,23 @@ public class PlayerController : MonoBehaviour
 
     public static bool rightPlayAudio;
 
+    public bool canMoveGlobal;
+    public int canMoveGlobalCount;
+    public int canMoveGlobalTotal;
+
+    public List<MovingBlockManager> movingBlockArray = new List<MovingBlockManager>();
+
     // Start is called before the first frame update
     void Start()
     {
+
+        movingBlockArray.Clear();
+
+        canMoveGlobalCount = 0;
+        canMoveGlobalTotal = 0;
+
+        canMoveGlobal = true;
+
         rightPlayAudio = false;
 
         rightMove = true;
@@ -79,28 +93,113 @@ public class PlayerController : MonoBehaviour
 
     public void Movement()
     {
+
+
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            canMoveGlobal = true;
+
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                MovementHorizontal(-moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+
+                    }
+                }
+
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementHorizontal(-moveAmount);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                MovementHorizontal(moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+                    }
+                }
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementHorizontal(moveAmount);
+                }
             }
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
+
+            canMoveGlobal = true;
+
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                MovementVertical(moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+                    }
+                }
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementVertical(moveAmount);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                MovementVertical(-moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+                    }
+                }
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementVertical(-moveAmount);
+                }
             }
         }
     }
