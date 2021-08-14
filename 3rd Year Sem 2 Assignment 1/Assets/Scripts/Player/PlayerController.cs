@@ -39,9 +39,30 @@ public class PlayerController : MonoBehaviour
 
     public static bool rightPlayAudio;
 
+    public bool canMoveGlobal;
+    public int canMoveGlobalCount;
+    public int canMoveGlobalTotal;
+
+    public List<MovingBlockManager> movingBlockArray = new List<MovingBlockManager>();
+
+    int rotateValue = 0;
+
+    public Transform playerTrans;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        playerTrans = this.transform;
+
+        //movingBlockArray.Clear();
+
+        canMoveGlobalCount = 0;
+        canMoveGlobalTotal = 0;
+
+        canMoveGlobal = true;
+
         rightPlayAudio = false;
 
         rightMove = true;
@@ -55,12 +76,13 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         //starManager = GameObject.Find("Game Manager").GetComponent<StarManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, moveToPoint.position, moveSpeed * Time.deltaTime);
+        playerTrans.position = Vector3.MoveTowards(transform.position, moveToPoint.position, moveSpeed * Time.deltaTime);
 
         if (Physics2D.OverlapPoint(transform.position, slidingBlocks))
         {
@@ -74,35 +96,182 @@ public class PlayerController : MonoBehaviour
         if (playerObserver.canMove)
         {
             Movement();
+
+            //Rotation();
+        }
+    }
+
+    public void Rotation()
+    {
+
+        //MUST CHECK FOR WALL COLLISION, SAME WAY AS MOVEMENT
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (rotateValue > 360)
+            {
+                rotateValue = 0;
+            }
+
+            rotateValue += 90;
+
+            this.transform.eulerAngles = new Vector3(0, 0, rotateValue);
         }
     }
 
     public void Movement()
     {
+
+
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            canMoveGlobal = true;
+
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                MovementHorizontal(-moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+
+                    }
+                }
+
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementHorizontal(-moveAmount);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                MovementHorizontal(moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+                    }
+                }
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementHorizontal(moveAmount);
+                }
             }
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
+
+            canMoveGlobal = true;
+
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                MovementVertical(moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+                    }
+                }
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementVertical(moveAmount);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                MovementVertical(-moveAmount);
+
+                for (int i = 0; i < movingBlockArray.Count + 1; i++)
+                {
+                    if (i != 0)
+                    {
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+
+                        if (movingBlockArray[i - 1].canMove == false)
+                        {
+                            canMoveGlobal = false;
+                            Debug.Log("FALSE");
+                        }
+                    }
+                }
+
+                if (canMoveGlobal)
+                {
+                    canMoveGlobalCount = 0;
+                    MovementVertical(-moveAmount);
+                }
             }
         }
+    }
+
+    public void DestroyBlock()
+    {
+
+        Transform firstChild = this.gameObject.transform.Find("Moving Block");
+
+        if (firstChild != null)
+        {
+            firstChild.gameObject.GetComponent<PlayerController>().enabled = true;
+
+            for (int i = 1; i < movingBlockArray.Count; i++)
+            {
+                firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray.Add(movingBlockArray[i]);
+            }
+
+            foreach (MovingBlockManager item in this.movingBlockArray)
+            {
+                print(item.name);
+            }
+
+            playerObserver.playerTransform = firstChild;
+
+            playerObserver.playerMoveTo = firstChild.gameObject.GetComponent<MovingBlockManager>().moveToPoint;
+
+            firstChild.gameObject.GetComponent<MovingBlockManager>().moveToPoint.gameObject.GetComponent<FollowScript>().enabled = false;
+
+            firstChild.parent = null;
+
+            firstChild.gameObject.name = "Player";
+            firstChild.gameObject.tag = "Player";
+
+            //firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray = this.gameObject.GetComponent<PlayerController>().movingBlockArray;
+
+            Debug.Log("LOST");
+        }
+
+        Destroy(moveToPoint.gameObject);
+
+        Destroy(this.gameObject);
+        //this.gameObject.GetComponent<PlayerController>().enabled = false;
+        
     }
 
     public void MovementHorizontal(float moveAmount)

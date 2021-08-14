@@ -14,6 +14,9 @@ public class PlayerObserver : MonoBehaviour
 
     //public StarManager starManager;
 
+    public GoalManager goalManager;
+
+
     private void Start()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
@@ -23,18 +26,25 @@ public class PlayerObserver : MonoBehaviour
         //leftPlayerMoveTo = GameObject.Find("PlayerMoveTo").GetComponent<Transform>();
 
         //starManager = GameObject.Find("Game Manager").GetComponent<StarManager>();
+
+        goalManager = GameObject.Find("Goal").GetComponent<GoalManager>();
     }
 
     private void FixedUpdate()
     {
-        if (Vector3.Distance(playerTransform.position, playerMoveTo.position) == 0f
-                    && !GameManager.gamePaused)
+
+        if(playerTransform != null && playerMoveTo != null)
         {
-            canMove = true;
-        }
-        else
-        {
-            canMove = false;
+            if (Vector3.Distance(playerTransform.position, playerMoveTo.position) == 0f
+            && !GameManager.gamePaused)
+            {
+                canMove = true;
+            }
+            else
+            {
+                canMove = false;
+                goalManager.goalChecked = false;
+            }
         }
 
         /*
@@ -47,5 +57,7 @@ public class PlayerObserver : MonoBehaviour
             LeftPlayerController.leftPlayAudio = false;
         }
         */
+
+
     }
 }

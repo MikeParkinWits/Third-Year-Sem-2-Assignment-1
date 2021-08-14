@@ -2,31 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingBlockController : MonoBehaviour
+public class GoalTriggers : MonoBehaviour
 {
 
-    public Transform parentTrans;
-
     public PlayerObserver playerObserver;
+
+    public bool inGoal;
 
     // Start is called before the first frame update
     void Start()
     {
         playerObserver = GameObject.Find("Player Observer").GetComponent<PlayerObserver>();
+
+        inGoal = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+            GoalChecker();
+
+            //Rotation();
+        
+    }
+
+    public void GoalChecker()
+    {
+
         
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //Debug.Log("INSIDE");
-        if (playerObserver.canMove)
-        {
-            parentTrans.parent = collision.transform;
-        }
+        Debug.Log("COLLIDE");
+
+        inGoal = true;
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        inGoal = false;
     }
 }

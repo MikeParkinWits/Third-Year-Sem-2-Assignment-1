@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Border
   - Player Move To
+  - MovingBlock
   layers:
   - Default
   - TransparentFX
