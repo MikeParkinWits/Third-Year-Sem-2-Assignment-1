@@ -122,7 +122,6 @@ MonoBehaviour:
   canMoveGlobalTotal: 0
   movingBlockArray: []
   playerTrans: {fileID: 0}
-  playerSpriteGameobject: {fileID: 0}
   playerSpriteRenderer: {fileID: 4942996119546627449}
 --- !u!1 &4942996119546627451
 GameObject:
@@ -194,7 +193,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2b79190c81f7c1b4e9b2e20b817be823, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

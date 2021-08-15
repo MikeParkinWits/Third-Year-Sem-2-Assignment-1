@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -280,6 +281,8 @@ public class PlayerController : MonoBehaviour
             //firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray = this.gameObject.GetComponent<PlayerController>().movingBlockArray;
 
             Debug.Log("LOST");
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         Destroy(moveToPoint.gameObject);

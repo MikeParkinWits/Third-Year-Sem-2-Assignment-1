@@ -43,7 +43,11 @@ public class MovingBlockController : MonoBehaviour
                 movingBlockManager.attached = true;
 
                 Debug.Log(movingBlockManager.attached);
-                playerController.movingBlockArray.Add(movingBlockManager);
+
+                if (!playerController.movingBlockArray.Contains(movingBlockManager))
+                {
+                    playerController.movingBlockArray.Add(movingBlockManager);
+                }
 
                 playerSpriteRenderer.color = new Color(0.4588f, 0.9101f, 1f, 1f);
 

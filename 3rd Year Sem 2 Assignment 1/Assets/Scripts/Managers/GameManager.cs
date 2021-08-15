@@ -8,12 +8,17 @@ public class GameManager : MonoBehaviour
 
     [Header("Game References")]
     public static bool gamePaused;
-    public GameObject pauseMenuUI; 
+    public GameObject pauseMenuUI;
+    public bool levelComplete;
+
+    public GameObject levelCompleteUI;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelComplete = false;
+        gamePaused = false;
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -29,6 +34,11 @@ public class GameManager : MonoBehaviour
             {
                 Pause();
             }
+        }
+
+        if (levelComplete)
+        {
+            levelCompleteUI.SetActive(true);
         }
     }
 
@@ -52,5 +62,10 @@ public class GameManager : MonoBehaviour
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
