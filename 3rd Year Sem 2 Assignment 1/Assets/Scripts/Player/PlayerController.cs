@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform playerTrans;
 
+    public SpriteRenderer playerSpriteRenderer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +78,8 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         //starManager = GameObject.Find("Game Manager").GetComponent<StarManager>();
+
+        playerSpriteRenderer.color = new Color(0.4588f, 0.9101f, 1f, 1f);
 
     }
 
