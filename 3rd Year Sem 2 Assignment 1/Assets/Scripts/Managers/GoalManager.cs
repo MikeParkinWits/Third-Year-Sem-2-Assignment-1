@@ -15,6 +15,8 @@ public class GoalManager : MonoBehaviour
 
     public bool goalChecked;
 
+    private GameManager gameManager;
+
     private void Awake()
     {
 
@@ -28,6 +30,8 @@ public class GoalManager : MonoBehaviour
         }
 
         playerInGoal = false;
+
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -73,6 +77,8 @@ public class GoalManager : MonoBehaviour
             if (playerController.movingBlockArray.Count + 1 == goalTrigger.Count)
             {
                 Debug.Log("WIN!");
+
+                gameManager.levelComplete = true;
 
                 Time.timeScale = 0;
             }
