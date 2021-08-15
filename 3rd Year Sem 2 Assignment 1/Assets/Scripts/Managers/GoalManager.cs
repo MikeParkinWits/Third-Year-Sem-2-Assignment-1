@@ -47,14 +47,14 @@ public class GoalManager : MonoBehaviour
             for (int i = 0; i < goalTrigger.Count; i++)
             {
 
-                    Debug.Log(i + "" + goalTrigger[i].inGoal);
+                    //Debug.Log(i + "" + goalTrigger[i].inGoal);
 
-                Debug.Log("GOAL: " + goalTrigger[i].inGoal);
+                //Debug.Log("GOAL: " + goalTrigger[i].inGoal);
 
                 if (goalTrigger[i].inGoal == false)
                     {
                         playerInGoal = false;
-                        Debug.Log("FALSE GOAL " + goalTrigger[i].inGoal);
+                        //Debug.Log("FALSE GOAL " + goalTrigger[i].inGoal);
                     }
 
                     if (i == goalTrigger.Count - 1)

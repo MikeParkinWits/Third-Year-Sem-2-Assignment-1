@@ -9,6 +9,7 @@ TagManager:
   - Border
   - Player Move To
   - MovingBlock
+  - MovingBlockCanConnect
   layers:
   - Default
   - TransparentFX
