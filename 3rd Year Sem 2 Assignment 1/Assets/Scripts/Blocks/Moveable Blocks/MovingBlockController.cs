@@ -12,6 +12,8 @@ public class MovingBlockController : MonoBehaviour
 
     public MovingBlockManager movingBlockManager;
 
+    public SpriteRenderer playerSpriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,8 @@ public class MovingBlockController : MonoBehaviour
 
                 Debug.Log(movingBlockManager.attached);
                 playerController.movingBlockArray.Add(movingBlockManager);
+
+                playerSpriteRenderer.color = new Color(0.4588f, 0.9101f, 1f, 1f);
 
                 this.transform.parent.gameObject.SetActive(false);
             }
