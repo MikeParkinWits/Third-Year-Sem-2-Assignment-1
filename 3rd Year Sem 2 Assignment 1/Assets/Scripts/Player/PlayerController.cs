@@ -132,17 +132,21 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < movingBlockArray.Count + 1; i++)
                 {
-                    if (i != 0)
-                    {
-                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
 
-                        if (movingBlockArray[i - 1].canMove == false)
+                        if (i != 0)
                         {
-                            canMoveGlobal = false;
-                            Debug.Log("FALSE");
-                        }
+ 
+                            Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
 
+                            if (movingBlockArray[i - 1].canMove == false)
+                            {
+                                canMoveGlobal = false;
+                                Debug.Log("FALSE");
+                            }
+
+                        
                     }
+
                 }
 
 
@@ -160,7 +164,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (i != 0)
                     {
-                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove + " " + movingBlockArray[i - 1].attached);
 
                         if (movingBlockArray[i - 1].canMove == false)
                         {
@@ -189,7 +193,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (i != 0)
                     {
-                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove + " " + movingBlockArray[i - 1].attached);
 
                         if (movingBlockArray[i - 1].canMove == false)
                         {
@@ -230,6 +234,13 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public IEnumerator CheckMove(int i)
+    {
+        Debug.Log("Waiting for princess to be rescued...");
+        yield return new WaitUntil(() => movingBlockArray[i - 1].checkDone == true);
+        Debug.Log("Princess was rescued!");
     }
 
     public void DestroyBlock()

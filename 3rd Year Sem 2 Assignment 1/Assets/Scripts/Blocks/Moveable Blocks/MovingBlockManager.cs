@@ -14,8 +14,14 @@ public class MovingBlockManager : MonoBehaviour
 
     public bool canMove;
 
+    public bool checkDone;
+
     private void Awake()
     {
+
+        canMove = true;
+
+        checkDone = false;
 
         moveableBlockCheckTransform = GameObject.Find("MoveableBlockChecker").GetComponent<Transform>();
 
@@ -43,6 +49,8 @@ public class MovingBlockManager : MonoBehaviour
 
     public void MovementChecker()
     {
+        canMove = true;
+
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -87,7 +95,7 @@ public class MovingBlockManager : MonoBehaviour
             {
                 //moveToPoint.position += new Vector3(moveAmount, 0f, 0f);
 
-                //Debug.Log("CAN MOVE");
+                Debug.Log("CAN MOVE");
 
                 //playerController.canMoveGlobal = true;
                 canMove = true;
@@ -96,10 +104,11 @@ public class MovingBlockManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log("CANNOT MOVE");
+            canMove = false;
+
+            Debug.Log("CANNOT MOVE");
 
             //playerController.canMoveGlobal = false;
-            canMove = false;
         }
 
         //SlidingBlocksHorizontal(moveAmount, moveAmount);
@@ -107,6 +116,8 @@ public class MovingBlockManager : MonoBehaviour
         //SwapTiles();
 
         //MovingBlock(true, moveAmount);
+
+        checkDone = true;
     }
 
     public void MovementVertical(float moveAmount)
@@ -119,7 +130,7 @@ public class MovingBlockManager : MonoBehaviour
             {
                 //moveToPoint.position += new Vector3(0f, moveAmount, 0f);
 
-                //Debug.Log("CAN MOVE");
+                Debug.Log("CAN MOVE");
 
                 //rightPlayAudio = true;
 
@@ -129,7 +140,7 @@ public class MovingBlockManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log("CANNOT MOVE");
+            Debug.Log("CANNOT MOVE");
 
             //playerController.canMoveGlobal = false;
 
@@ -141,6 +152,8 @@ public class MovingBlockManager : MonoBehaviour
         //SwapTiles();
 
         //MovingBlock(false, moveAmount);
+
+        checkDone = true;
     }
 
     public void DestroyBlock()
