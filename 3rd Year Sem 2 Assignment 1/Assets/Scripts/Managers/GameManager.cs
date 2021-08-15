@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     public void Play()
     {
-        Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
         gamePaused = false;
     }
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
         gamePaused = true;
     }
     public void Quitting()
