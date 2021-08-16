@@ -282,6 +282,10 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("LOST");
 
+        }
+
+        if (firstChild == null)
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
