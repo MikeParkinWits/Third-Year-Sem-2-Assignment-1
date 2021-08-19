@@ -20,11 +20,6 @@ public class SpikeController : MonoBehaviour
     void Update()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            playerController.DestroyBlock();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
