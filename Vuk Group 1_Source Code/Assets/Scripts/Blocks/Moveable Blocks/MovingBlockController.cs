@@ -47,6 +47,7 @@ public class MovingBlockController : MonoBehaviour
                 if (!playerController.movingBlockArray.Contains(movingBlockManager))
                 {
                     playerController.movingBlockArray.Add(movingBlockManager);
+                    playerController.movingBlockTransformList.Add(movingBlockManager.transform);
                 }
 
                 playerSpriteRenderer.color = new Color(0.4588f, 0.9101f, 1f, 1f);

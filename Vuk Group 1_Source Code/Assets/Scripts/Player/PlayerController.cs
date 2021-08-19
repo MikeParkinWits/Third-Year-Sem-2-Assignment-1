@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public int canMoveGlobalTotal;
 
     public List<MovingBlockManager> movingBlockArray = new List<MovingBlockManager>();
+    public List<Transform> movingBlockTransformList = new List<Transform>();
 
     int rotateValue = 0;
 
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
     public SpriteRenderer playerSpriteRenderer;
 
+    public bool canDestroy = false;
 
     // Start is called before the first frame update
     void Start()
@@ -104,6 +106,9 @@ public class PlayerController : MonoBehaviour
 
             //Rotation();
         }
+
+        //Transform[] children = this.gameObject.transform.Find("Moving Block").GetComponentsInChildren<Transform>();
+        Debug.Log(movingBlockTransformList.Count);
     }
 
     public void Rotation()
@@ -250,8 +255,15 @@ public class PlayerController : MonoBehaviour
 
     public void DestroyBlock()
     {
+        List<Transform> firstChildOne = new List<Transform>();
+
+        //Transform[] children = this.gameObject.transform.Find("Moving Block").GetComponentsInChildren<Transform>();
+
+        //firstChildOne = this.gameObject.transform.Find("Moving Block");
 
         Transform firstChild = this.gameObject.transform.Find("Moving Block");
+
+        Debug.Log("First Child" + firstChild);
 
         if (firstChild != null)
         {
@@ -260,11 +272,13 @@ public class PlayerController : MonoBehaviour
             for (int i = 1; i < movingBlockArray.Count; i++)
             {
                 firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray.Add(movingBlockArray[i]);
+
+
             }
 
             foreach (MovingBlockManager item in this.movingBlockArray)
             {
-                print(item.name);
+                print("GO GO " + item.name);
             }
 
             playerObserver.playerTransform = firstChild;
@@ -284,6 +298,15 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        foreach (Transform child in movingBlockTransformList)
+        {
+            if (child != firstChild)
+            {
+                child.parent = firstChild.transform;
+            }
+        }
+
+
         if (firstChild == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -293,8 +316,85 @@ public class PlayerController : MonoBehaviour
 
         Destroy(this.gameObject);
         //this.gameObject.GetComponent<PlayerController>().enabled = false;
-        
     }
+
+    /*
+    public void DestroyBlock()
+    {
+        StartCoroutine(CheckPlayerDestroy());
+    }
+
+    public IEnumerator CheckPlayerDestroy()
+    {
+        List<Transform> firstChildOne = new List<Transform>();
+
+        //Transform[] children = this.gameObject.transform.Find("Moving Block").GetComponentsInChildren<Transform>();
+
+        //firstChildOne = this.gameObject.transform.Find("Moving Block");
+
+        Transform firstChild = this.gameObject.transform.Find("Moving Block");
+
+        Debug.Log("First Child" + firstChild);
+
+        if (firstChild != null)
+        {
+            firstChild.gameObject.GetComponent<PlayerController>().enabled = true;
+
+            for (int i = 1; i < movingBlockArray.Count; i++)
+            {
+                firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray.Add(movingBlockArray[i]);
+
+                if (i == movingBlockArray.Count - 1)
+                {
+                    canDestroy = true;
+                }
+            }
+
+            foreach (MovingBlockManager item in this.movingBlockArray)
+            {
+                print("GO GO " + item.name);
+            }
+
+            playerObserver.playerTransform = firstChild;
+
+            playerObserver.playerMoveTo = firstChild.gameObject.GetComponent<MovingBlockManager>().moveToPoint;
+
+            firstChild.gameObject.GetComponent<MovingBlockManager>().moveToPoint.gameObject.GetComponent<FollowScript>().enabled = false;
+
+            firstChild.parent = null;
+
+            firstChild.gameObject.name = "Player";
+            firstChild.gameObject.tag = "Player";
+
+            //firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray = this.gameObject.GetComponent<PlayerController>().movingBlockArray;
+
+            Debug.Log("LOST");
+
+        }
+
+        foreach (Transform child in movingBlockTransformList)
+        {
+            if (child != firstChild)
+            {
+                child.parent = firstChild.transform;
+            }
+        }
+
+
+        if (firstChild == null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        yield return new WaitUntil(() => canDestroy);
+
+        Destroy(moveToPoint.gameObject);
+
+        Destroy(this.gameObject);
+        //this.gameObject.GetComponent<PlayerController>().enabled = false;
+    }
+
+    */
 
     public void MovementHorizontal(float moveAmount)
     {

@@ -160,6 +160,8 @@ public class MovingBlockManager : MonoBehaviour
     {
         //Transform firstChild = GameObject.Find("MovingBlock").transform.GetChild(0);
 
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
         Transform firstChild = this.gameObject.transform.Find("Moving Block");
 
         if (firstChild != null)

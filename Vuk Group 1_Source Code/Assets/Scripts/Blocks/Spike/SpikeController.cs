@@ -26,6 +26,7 @@ public class SpikeController : MonoBehaviour
     {
 
         playerObserver = GameObject.Find("Player Observer").GetComponent<PlayerObserver>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         //Debug.Log("COLLIDE");
 
@@ -34,9 +35,11 @@ public class SpikeController : MonoBehaviour
         {
             if (collision.tag == "Player")
             {
+
                 playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
                 playerController.DestroyBlock();
+
             }
 
             if (collision.tag == "MovingBlockCanConnect")

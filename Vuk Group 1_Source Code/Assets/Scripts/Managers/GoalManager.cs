@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoalManager : MonoBehaviour
 {
@@ -81,6 +82,8 @@ public class GoalManager : MonoBehaviour
                 gameManager.levelComplete = true;
 
                 Time.timeScale = 0;
+
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + " Complete", 1);
             }
         }
         else
