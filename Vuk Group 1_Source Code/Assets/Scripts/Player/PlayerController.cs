@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public int canMoveGlobalTotal;
 
     public List<MovingBlockManager> movingBlockArray = new List<MovingBlockManager>();
+    public List<Transform> movingBlockTransformList = new List<Transform>();
 
     int rotateValue = 0;
 
@@ -52,6 +53,11 @@ public class PlayerController : MonoBehaviour
 
     public SpriteRenderer playerSpriteRenderer;
 
+    public bool canDestroy = false;
+
+    public GameObject pergatory;
+
+    public int destroyCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +88,9 @@ public class PlayerController : MonoBehaviour
 
         playerSpriteRenderer.color = new Color(0.4588f, 0.9101f, 1f, 1f);
 
+        pergatory = GameObject.Find("Pergatory");
+        pergatory.transform.parent = null;
+
     }
 
     // Update is called once per frame
@@ -104,6 +113,9 @@ public class PlayerController : MonoBehaviour
 
             //Rotation();
         }
+
+        //Transform[] children = this.gameObject.transform.Find("Moving Block").GetComponentsInChildren<Transform>();
+        ////debug.Log(movingBlockTransformList.Count);
     }
 
     public void Rotation()
@@ -141,12 +153,12 @@ public class PlayerController : MonoBehaviour
                         if (i != 0)
                         {
  
-                            Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+                            //debug.Log(i + "" + movingBlockArray[i - 1].canMove);
 
                             if (movingBlockArray[i - 1].canMove == false)
                             {
                                 canMoveGlobal = false;
-                                Debug.Log("FALSE");
+                                //debug.Log("FALSE");
                             }
 
                         
@@ -169,12 +181,12 @@ public class PlayerController : MonoBehaviour
                 {
                     if (i != 0)
                     {
-                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove + " " + movingBlockArray[i - 1].attached);
+                        //debug.Log(i + "" + movingBlockArray[i - 1].canMove + " " + movingBlockArray[i - 1].attached);
 
                         if (movingBlockArray[i - 1].canMove == false)
                         {
                             canMoveGlobal = false;
-                            Debug.Log("FALSE");
+                            //debug.Log("FALSE");
                         }
                     }
                 }
@@ -198,12 +210,12 @@ public class PlayerController : MonoBehaviour
                 {
                     if (i != 0)
                     {
-                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove + " " + movingBlockArray[i - 1].attached);
+                        //debug.Log(i + "" + movingBlockArray[i - 1].canMove + " " + movingBlockArray[i - 1].attached);
 
                         if (movingBlockArray[i - 1].canMove == false)
                         {
                             canMoveGlobal = false;
-                            Debug.Log("FALSE");
+                            //debug.Log("FALSE");
                         }
                     }
                 }
@@ -222,12 +234,12 @@ public class PlayerController : MonoBehaviour
                 {
                     if (i != 0)
                     {
-                        Debug.Log(i + "" + movingBlockArray[i - 1].canMove);
+                        //debug.Log(i + "" + movingBlockArray[i - 1].canMove);
 
                         if (movingBlockArray[i - 1].canMove == false)
                         {
                             canMoveGlobal = false;
-                            Debug.Log("FALSE");
+                            //debug.Log("FALSE");
                         }
                     }
                 }
@@ -243,15 +255,138 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator CheckMove(int i)
     {
-        Debug.Log("Waiting for princess to be rescued...");
+        //debug.Log("Waiting for princess to be rescued...");
         yield return new WaitUntil(() => movingBlockArray[i - 1].checkDone == true);
-        Debug.Log("Princess was rescued!");
+        //debug.Log("Princess was rescued!");
     }
 
     public void DestroyBlock()
     {
+        List<Transform> firstChildOne = new List<Transform>();
+
+        Transform[] children = this.gameObject.transform.GetComponentsInChildren<Transform>();
+
+        Debug.Log(children.Length);
+
+        foreach (Transform trans in children)
+        {
+            if (trans.name == "Moving Block")
+            {
+                firstChildOne.Add(trans);
+                trans.parent = pergatory.transform;
+                ////debug.Log("child" + trans.name);
+                destroyCount++;
+            }
+        }
+
+        if (destroyCount == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        //firstChildOne = this.gameObject.transform.Find("Moving Block");
+
+        //Transform firstChild = this.gameObject.transform.Find("Moving Block");
+
+        ////debug.Log("First Child" + firstChild);
+
+        if (firstChildOne[0] != null)
+        {
+            firstChildOne[0].gameObject.GetComponent<PlayerController>().enabled = true;
+
+            /*
+
+            for (int i = 1; i < movingBlockArray.Count; i++)
+            {
+                firstChildOne[0].gameObject.GetComponent<PlayerController>().movingBlockArray.Add(movingBlockArray[i]);
+
+                //debug.Log("Moving Block Array " + movingBlockArray[i]);
+
+                //debug.Log("Moving Block Array " + movingBlockArray.Count);
+
+
+            }
+
+            */
+
+
+            foreach (MovingBlockManager item in this.movingBlockArray)
+            {
+                //print("GO GO " + item.name);
+            }
+
+            playerObserver.playerTransform = firstChildOne[0];
+
+            playerObserver.playerMoveTo = firstChildOne[0].gameObject.GetComponent<MovingBlockManager>().moveToPoint;
+
+            firstChildOne[0].gameObject.GetComponent<MovingBlockManager>().moveToPoint.gameObject.GetComponent<FollowScript>().enabled = false;
+
+            firstChildOne[0].parent = null;
+
+            firstChildOne[0].gameObject.name = "Player";
+            firstChildOne[0].gameObject.tag = "Player";
+
+            //firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray = this.gameObject.GetComponent<PlayerController>().movingBlockArray;
+
+            //debug.Log("LOST");
+
+            Transform[] childTest = pergatory.transform.GetComponentsInChildren<Transform>();
+
+            foreach (Transform trans in childTest)
+            {
+                if (trans.name == "Moving Block")
+                {
+                    trans.parent = firstChildOne[0].transform;
+                    ////debug.Log("child" + trans.name);
+                    firstChildOne[0].gameObject.GetComponent<PlayerController>().movingBlockArray.Add(trans.GetComponent<MovingBlockManager>());
+                }
+            }
+
+        }
+
+
+
+        /*
+
+        foreach (Transform child in movingBlockTransformList)
+        {
+            if (child != firstChildOne[0])
+            {
+                child.parent = firstChildOne[0].transform;
+            }
+        }
+
+        */
+
+        Destroy(moveToPoint.gameObject);
+
+        Destroy(this.gameObject);
+
+        //this.gameObject.GetComponent<PlayerController>().enabled = false;
+    }
+
+    public void Death()
+    {
+
+    }
+
+    /*
+    public void DestroyBlock()
+    {
+        StartCoroutine(CheckPlayerDestroy());
+    }
+
+    public IEnumerator CheckPlayerDestroy()
+    {
+        List<Transform> firstChildOne = new List<Transform>();
+
+        //Transform[] children = this.gameObject.transform.Find("Moving Block").GetComponentsInChildren<Transform>();
+
+        //firstChildOne = this.gameObject.transform.Find("Moving Block");
 
         Transform firstChild = this.gameObject.transform.Find("Moving Block");
+
+        //debug.Log("First Child" + firstChild);
 
         if (firstChild != null)
         {
@@ -260,11 +395,16 @@ public class PlayerController : MonoBehaviour
             for (int i = 1; i < movingBlockArray.Count; i++)
             {
                 firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray.Add(movingBlockArray[i]);
+
+                if (i == movingBlockArray.Count - 1)
+                {
+                    canDestroy = true;
+                }
             }
 
             foreach (MovingBlockManager item in this.movingBlockArray)
             {
-                print(item.name);
+                print("GO GO " + item.name);
             }
 
             playerObserver.playerTransform = firstChild;
@@ -280,21 +420,33 @@ public class PlayerController : MonoBehaviour
 
             //firstChild.gameObject.GetComponent<PlayerController>().movingBlockArray = this.gameObject.GetComponent<PlayerController>().movingBlockArray;
 
-            Debug.Log("LOST");
+            //debug.Log("LOST");
 
         }
+
+        foreach (Transform child in movingBlockTransformList)
+        {
+            if (child != firstChild)
+            {
+                child.parent = firstChild.transform;
+            }
+        }
+
 
         if (firstChild == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
+        yield return new WaitUntil(() => canDestroy);
+
         Destroy(moveToPoint.gameObject);
 
         Destroy(this.gameObject);
         //this.gameObject.GetComponent<PlayerController>().enabled = false;
-        
     }
+
+    */
 
     public void MovementHorizontal(float moveAmount)
     {

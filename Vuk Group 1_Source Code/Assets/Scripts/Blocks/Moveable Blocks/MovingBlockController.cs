@@ -29,7 +29,7 @@ public class MovingBlockController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //Debug.Log("INSIDE");
+        ////debug.Log("INSIDE");
         if (playerObserver.canMove)
         {
             if (collision.tag == "Player" || collision.tag == "MovingBlockCanConnect")
@@ -42,11 +42,12 @@ public class MovingBlockController : MonoBehaviour
 
                 movingBlockManager.attached = true;
 
-                Debug.Log(movingBlockManager.attached);
+                //debug.Log(movingBlockManager.attached);
 
                 if (!playerController.movingBlockArray.Contains(movingBlockManager))
                 {
                     playerController.movingBlockArray.Add(movingBlockManager);
+                    playerController.movingBlockTransformList.Add(movingBlockManager.transform);
                 }
 
                 playerSpriteRenderer.color = new Color(0.4588f, 0.9101f, 1f, 1f);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoalManager : MonoBehaviour
 {
@@ -51,14 +52,14 @@ public class GoalManager : MonoBehaviour
             for (int i = 0; i < goalTrigger.Count; i++)
             {
 
-                    //Debug.Log(i + "" + goalTrigger[i].inGoal);
+                    ////debug.Log(i + "" + goalTrigger[i].inGoal);
 
-                //Debug.Log("GOAL: " + goalTrigger[i].inGoal);
+                ////debug.Log("GOAL: " + goalTrigger[i].inGoal);
 
                 if (goalTrigger[i].inGoal == false)
                     {
                         playerInGoal = false;
-                        //Debug.Log("FALSE GOAL " + goalTrigger[i].inGoal);
+                        ////debug.Log("FALSE GOAL " + goalTrigger[i].inGoal);
                     }
 
                     if (i == goalTrigger.Count - 1)
@@ -76,11 +77,13 @@ public class GoalManager : MonoBehaviour
 
             if (playerController.movingBlockArray.Count + 1 == goalTrigger.Count)
             {
-                Debug.Log("WIN!");
+                //debug.Log("WIN!");
 
                 gameManager.levelComplete = true;
 
                 Time.timeScale = 0;
+
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + " Complete", 1);
             }
         }
         else

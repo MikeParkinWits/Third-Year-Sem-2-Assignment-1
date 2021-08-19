@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b60707d2050ac64b9531b9500ee0a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 3.5
   moveAmount: 1
   moveToPoint: {fileID: 6860481654180757004}
   whatStopsMovement1:
@@ -535,8 +535,12 @@ MonoBehaviour:
   canMoveGlobalCount: 0
   canMoveGlobalTotal: 0
   movingBlockArray: []
+  movingBlockTransformList: []
   playerTrans: {fileID: 0}
   playerSpriteRenderer: {fileID: 6860481653232608134}
+  canDestroy: 0
+  pergatory: {fileID: 0}
+  destroyCount: 0
 --- !u!50 &6860481653825956996
 Rigidbody2D:
   serializedVersion: 4
