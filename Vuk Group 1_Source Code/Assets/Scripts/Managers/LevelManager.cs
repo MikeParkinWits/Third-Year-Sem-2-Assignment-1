@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
         foreach (Transform trans in levelButtons)
 
         {
-            Debug.Log("child" + trans.name);
+            //debug.Log("child" + trans.name);
             lockedLevelButtons.Add(trans);
         }
 

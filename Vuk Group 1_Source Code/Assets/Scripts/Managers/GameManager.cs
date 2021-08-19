@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     }
     public void Quitting()
     {
-        Debug.Log("Quitting Game");
+        //debug.Log("Quitting Game");
         Application.Quit();
     }
 

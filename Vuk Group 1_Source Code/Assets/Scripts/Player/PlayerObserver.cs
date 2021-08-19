@@ -16,9 +16,14 @@ public class PlayerObserver : MonoBehaviour
 
     public GoalManager goalManager;
 
+    public bool spikeCanMove;
+
 
     private void Start()
     {
+
+        spikeCanMove = true;
+
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         //leftPlayer = GameObject.Find("Player Left").GetComponent<Transform>();
 
@@ -38,7 +43,7 @@ public class PlayerObserver : MonoBehaviour
             if (Vector3.Distance(playerTransform.position, playerMoveTo.position) == 0f
             && !GameManager.gamePaused)
             {
-                canMove = true;
+                Invoke("CanMoveTrue", 0.05f);
             }
             else
             {
@@ -60,4 +65,11 @@ public class PlayerObserver : MonoBehaviour
 
 
     }
+
+    public void CanMoveTrue()
+    {
+        canMove = true;
+    }
+
+
 }

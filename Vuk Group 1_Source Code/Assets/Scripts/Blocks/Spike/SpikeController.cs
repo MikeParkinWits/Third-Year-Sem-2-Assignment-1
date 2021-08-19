@@ -19,26 +19,33 @@ public class SpikeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            playerController.DestroyBlock();
+        }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
 
         playerObserver = GameObject.Find("Player Observer").GetComponent<PlayerObserver>();
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-        //Debug.Log("COLLIDE");
+        ////debug.Log("COLLIDE");
 
+        playerObserver.spikeCanMove = false;
 
-        if (playerObserver.canMove)
-        {
             if (collision.tag == "Player")
             {
 
                 playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-                playerController.DestroyBlock();
+            playerController.playerSpriteRenderer.enabled = false;
+
+
+                Invoke("DestroyPlayer", 0.5f);
 
             }
 
@@ -47,14 +54,39 @@ public class SpikeController : MonoBehaviour
 
                 currentMovingBlockManager = collision.gameObject.GetComponent<MovingBlockManager>();
 
-                Debug.Log(currentMovingBlockManager);
+                //debug.Log(currentMovingBlockManager);
 
                 currentMovingBlockManager.DestroyBlock();
+
+            playerObserver.spikeCanMove = true;
             }
 
 
+        
+
+    }
+
+    public void DestroyPlayer()
+    {
+        if (playerObserver.canMove)
+        {
+            playerController.DestroyBlock();
+        }
+        else
+        {
+            StartCoroutine(DestroyTester());
         }
 
+        //Destroy(playerController.gameObject);
+
+        playerObserver.spikeCanMove = true;
+    }
+
+    public IEnumerator DestroyTester()
+    {
+        yield return new WaitUntil(() => playerObserver.canMove);
+
+        playerController.DestroyBlock();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
