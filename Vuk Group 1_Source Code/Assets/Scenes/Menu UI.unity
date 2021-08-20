@@ -1291,7 +1291,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -17}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &427219810
 MonoBehaviour:
@@ -1857,7 +1857,7 @@ GameObject:
   - component: {fileID: 636544075}
   - component: {fileID: 636544074}
   m_Layer: 5
-  m_Name: You Lost!
+  m_Name: Credits Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1879,8 +1879,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0012817383, y: -47.2874}
-  m_SizeDelta: {x: 1325.6, y: 394.575}
+  m_AnchoredPosition: {x: -0.0045776367, y: -0.0025024414}
+  m_SizeDelta: {x: 1342.6, y: 947.1085}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636544074
 MonoBehaviour:
@@ -1895,7 +1895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1903,8 +1903,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: 5b79eceebac9bb3429febd94601b2c71, type: 3}
+    m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1914,8 +1914,18 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: '- All Assets & Coding by Ash Juggpall, Michael Parkin, and Payal Chana'
+    m_LineSpacing: 1.3
+  m_Text: "- All Assets and Coding by Ashish Juggpall, Michael Parkin, and Payal
+    Chana\n- Refrigerator magnet stick on fridge door 2 by Zapsplat is licensed under
+    Zapsplat Standard License\n- Very heavy metal object drop onto ground, with some
+    debris, dirt and stones. Version 4\r by Zapsplat is licensed under Zapsplat Standard
+    License\n- Game sound, wooden mallet clunk, negative double tap tone 3\r by Zapsplat
+    is licensed under Zapsplat Standard License\n- Organic button click, good for
+    apps, games, UI, software etc 5\r by Zapsplat is licensed under Zapsplat Standard
+    License\n- Alert, prompt, win, positive tone 006\r by Zapsplat is licensed under
+    Zapsplat Standard License\n- SquareFont\r by Bou Fonts\r is licensed under Open
+    Font Library (OFL)\n- Ambient.mp3\r by kickhat is licensed under CC BY 3.0\n-
+    Space traveller\r by szegvari is licensed under CC0 1.0"
 --- !u!222 &636544075
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2154,7 +2164,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 3
   m_Viewport: {fileID: 427219809}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -3280,6 +3290,8 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 971887050}
   levelComplete: 0
   levelCompleteUI: {fileID: 0}
+  movingBlockManager: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!4 &1277568292
 Transform:
   m_ObjectHideFlags: 0
@@ -3662,8 +3674,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000032362328}
-  m_SizeDelta: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0.000076293945, y: 0.00078226364}
+  m_SizeDelta: {x: 0, y: 947.1135}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1461836355
 GameObject:
@@ -3906,7 +3918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1475584031
 RectTransform:
   m_ObjectHideFlags: 0
