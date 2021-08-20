@@ -13,12 +13,20 @@ public class GameManager : MonoBehaviour
 
     public GameObject levelCompleteUI;
 
+    public MovingBlockManager movingBlockManager;
+
+    private float timer = 0;
+
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         levelComplete = false;
         gamePaused = false;
         Time.timeScale = 1f;
+
+        timer = 0f;
     }
 
     // Update is called once per frame
@@ -39,6 +47,28 @@ public class GameManager : MonoBehaviour
         if (levelComplete)
         {
             levelCompleteUI.SetActive(true);
+        }
+
+        if (SceneManager.GetActiveScene().name == "Level 2")
+        {
+
+            Debug.Log(movingBlockManager.attached);
+
+            Debug.Log(PlayerPrefs.GetInt("Level 2 Tutorial Complete"));
+
+            if (!movingBlockManager.attached && PlayerPrefs.GetInt("Level 2 Tutorial Complete") != 1)
+            {
+                if (timer <= 5)
+                {
+                    timer += Time.deltaTime;
+                }
+                else
+                {
+                    anim.Play("Level Two Animation");
+                }
+
+                Debug.Log(timer);
+            }
         }
     }
 

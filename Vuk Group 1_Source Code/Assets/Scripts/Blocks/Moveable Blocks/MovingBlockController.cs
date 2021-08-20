@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovingBlockController : MonoBehaviour
 {
@@ -43,6 +44,11 @@ public class MovingBlockController : MonoBehaviour
 
 
                 movingBlockManager.attached = true;
+
+                if (SceneManager.GetActiveScene().name == "Level 2")
+                {
+                    PlayerPrefs.SetInt("Level 2 Tutorial Complete", 1);
+                }
 
                 //debug.Log(movingBlockManager.attached);
 
