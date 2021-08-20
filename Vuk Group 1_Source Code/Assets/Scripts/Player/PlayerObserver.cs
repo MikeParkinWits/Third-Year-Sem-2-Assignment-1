@@ -18,9 +18,13 @@ public class PlayerObserver : MonoBehaviour
 
     public bool spikeCanMove;
 
+    public static bool wrongShapeAudioPlayed;
+
 
     private void Start()
     {
+
+        wrongShapeAudioPlayed = false;
 
         spikeCanMove = true;
 
@@ -37,6 +41,8 @@ public class PlayerObserver : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        //Debug.Log(wrongShapeAudioPlayed);
 
         if(playerTransform != null && playerMoveTo != null)
         {

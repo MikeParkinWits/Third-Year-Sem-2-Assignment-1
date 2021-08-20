@@ -116,6 +116,11 @@ public class PlayerController : MonoBehaviour
 
         //Transform[] children = this.gameObject.transform.Find("Moving Block").GetComponentsInChildren<Transform>();
         ////debug.Log(movingBlockTransformList.Count);
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void Rotation()
@@ -139,12 +144,12 @@ public class PlayerController : MonoBehaviour
     public void Movement()
     {
 
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)
+                 || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
         {
             canMoveGlobal = true;
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
 
                 for (int i = 0; i < movingBlockArray.Count + 1; i++)
@@ -174,7 +179,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
 
                 for (int i = 0; i < movingBlockArray.Count + 1; i++)
@@ -198,12 +203,14 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)
+                     || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
         {
+
 
             canMoveGlobal = true;
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
 
                 for (int i = 0; i < movingBlockArray.Count + 1; i++)
@@ -227,7 +234,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
 
                 for (int i = 0; i < movingBlockArray.Count + 1; i++)
@@ -458,6 +465,8 @@ public class PlayerController : MonoBehaviour
             {
                 moveToPoint.position += new Vector3(moveAmount, 0f, 0f);
 
+                AudioManager.playerMovementAudio.Play();
+
                 //rightPlayAudio = true;
             }
         }
@@ -478,6 +487,8 @@ public class PlayerController : MonoBehaviour
                         || Physics2D.OverlapPoint(transform.position + new Vector3(0f, moveAmount * 2, 0f), goalMask))))
             {
                 moveToPoint.position += new Vector3(0f, moveAmount, 0f);
+
+                AudioManager.playerMovementAudio.Play();
 
                 //rightPlayAudio = true;
             }
