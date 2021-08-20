@@ -106,7 +106,7 @@ public class GoalManager : MonoBehaviour
 
                     if (!PlayerObserver.wrongShapeAudioPlayed)
                     {
-                        AudioManager.wrongGoalShapeAudio.Play();
+                        //AudioManager.wrongGoalShapeAudio.Play();
                         PlayerObserver.wrongShapeAudioPlayed = true;
 
                     }
