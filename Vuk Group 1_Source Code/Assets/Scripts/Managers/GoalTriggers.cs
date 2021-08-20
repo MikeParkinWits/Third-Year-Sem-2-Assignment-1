@@ -36,8 +36,10 @@ public class GoalTriggers : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //debug.Log("COLLIDE");
-
-        inGoal = true;
+        if (collision.tag != "Untagged")
+        {
+            inGoal = true;
+        }
 
     }
 

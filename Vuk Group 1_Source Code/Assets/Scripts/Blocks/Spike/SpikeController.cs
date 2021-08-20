@@ -11,6 +11,8 @@ public class SpikeController : MonoBehaviour
 
     public PlayerController playerController;
 
+    public GameObject particleSystemDeath;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,11 @@ public class SpikeController : MonoBehaviour
             if (collision.tag == "Player")
             {
 
+            AudioManager.spikeHitAudio.Play();
+
                 playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+            Instantiate(particleSystemDeath, new Vector3(playerController.gameObject.transform.position.x, playerController.transform.position.y), Quaternion.identity);
 
             playerController.playerSpriteRenderer.enabled = false;
 
@@ -49,15 +55,19 @@ public class SpikeController : MonoBehaviour
 
                 currentMovingBlockManager = collision.gameObject.GetComponent<MovingBlockManager>();
 
+            Instantiate(particleSystemDeath, new Vector3(currentMovingBlockManager.gameObject.transform.position.x, currentMovingBlockManager.transform.position.y), Quaternion.identity);
+
                 //debug.Log(currentMovingBlockManager);
 
                 currentMovingBlockManager.DestroyBlock();
 
             playerObserver.spikeCanMove = true;
-            }
+
+            AudioManager.spikeHitAudio.Play();
+        }
 
 
-        
+
 
     }
 
