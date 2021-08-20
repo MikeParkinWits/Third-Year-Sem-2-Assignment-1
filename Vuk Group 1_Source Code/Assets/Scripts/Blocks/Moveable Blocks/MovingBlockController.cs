@@ -34,11 +34,13 @@ public class MovingBlockController : MonoBehaviour
         {
             if (collision.tag == "Player" || collision.tag == "MovingBlockCanConnect")
             {
+                AudioManager.clickAudio.Play();
                 //parentTrans.parent = GameObject.FindGameObjectWithTag("Player").transform;
                 parentTrans.parent = collision.transform;
                 playerController.canMoveGlobalTotal++;
 
                 parentTrans.tag = "MovingBlockCanConnect";
+
 
                 movingBlockManager.attached = true;
 
