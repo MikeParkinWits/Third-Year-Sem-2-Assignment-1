@@ -7051,6 +7051,8 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 1028396559}
   levelComplete: 0
   levelCompleteUI: {fileID: 1520128503}
+  movingBlockManager: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!4 &1347352108
 Transform:
   m_ObjectHideFlags: 0
@@ -7302,7 +7304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6860481653825956992, guid: bb95bfff4328052488cf3d9bfa823eb2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6860481653825956992, guid: bb95bfff4328052488cf3d9bfa823eb2, type: 3}
       propertyPath: m_LocalPosition.z
