@@ -21,4 +21,14 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+
+    public void ClearSave()
+    {
+        PlayerPrefs.SetInt("Level 2 Tutorial Complete", 0);
+
+        for (int i = 1; i <= 10; i++)
+        {
+            PlayerPrefs.SetInt("Level " + i + " Complete", 0);
+        }
+    }
 }

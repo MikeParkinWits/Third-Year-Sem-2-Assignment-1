@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
             if (!movingBlockManager.attached && PlayerPrefs.GetInt("Level 2 Tutorial Complete") != 1)
             {
-                if (timer <= 15)
+                if (timer <= 14)
                 {
                     timer += Time.deltaTime;
                 }
