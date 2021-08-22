@@ -5,14 +5,10 @@ using UnityEngine;
 public class PlayerObserver : MonoBehaviour
 {
     public Transform playerTransform;
-    //public Transform leftPlayer;
 
     public Transform playerMoveTo;
-    //public Transform leftPlayerMoveTo;
 
     public bool canMove;
-
-    //public StarManager starManager;
 
     public GoalManager goalManager;
 
@@ -29,20 +25,14 @@ public class PlayerObserver : MonoBehaviour
         spikeCanMove = true;
 
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
-        //leftPlayer = GameObject.Find("Player Left").GetComponent<Transform>();
 
         playerMoveTo = GameObject.Find("Player Move To").GetComponent<Transform>();
-        //leftPlayerMoveTo = GameObject.Find("PlayerMoveTo").GetComponent<Transform>();
-
-        //starManager = GameObject.Find("Game Manager").GetComponent<StarManager>();
 
         goalManager = GameObject.Find("Goal").GetComponent<GoalManager>();
     }
 
     private void FixedUpdate()
     {
-
-        //Debug.Log(wrongShapeAudioPlayed);
 
         if(playerTransform != null && playerMoveTo != null)
         {
@@ -57,17 +47,6 @@ public class PlayerObserver : MonoBehaviour
                 goalManager.goalChecked = false;
             }
         }
-
-        /*
-        if (RightPlayerController.rightPlayAudio || LeftPlayerController.leftPlayAudio)
-        {
-            starManager.movementScore++;
-            AudioStayManager.playerMoveAudio.Play();
-
-            RightPlayerController.rightPlayAudio = false;
-            LeftPlayerController.leftPlayAudio = false;
-        }
-        */
 
 
     }

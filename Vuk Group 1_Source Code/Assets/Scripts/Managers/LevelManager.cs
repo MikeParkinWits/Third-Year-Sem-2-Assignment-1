@@ -17,7 +17,6 @@ public class LevelManager : MonoBehaviour
         foreach (Transform trans in levelButtons)
 
         {
-            //debug.Log("child" + trans.name);
             lockedLevelButtons.Add(trans);
         }
 
@@ -31,12 +30,6 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void LoadScene(string name)

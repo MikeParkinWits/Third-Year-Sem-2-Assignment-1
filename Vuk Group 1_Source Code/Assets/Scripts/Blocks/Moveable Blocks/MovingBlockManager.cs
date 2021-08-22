@@ -44,7 +44,6 @@ public class MovingBlockManager : MonoBehaviour
         {
             MovementChecker();
         }
-        ////debug.Log(playerController.canMoveGlobalCount);
     }
 
     public void MovementChecker()
@@ -57,13 +56,13 @@ public class MovingBlockManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
                 playerController.canMoveGlobalCount++;
-                ////debug.Log("Hello");
+
                 MovementHorizontal(-playerController.moveAmount);
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
-                ////debug.Log("Hello");
+
                 playerController.canMoveGlobalCount++;
                 MovementHorizontal(playerController.moveAmount);
             }
@@ -73,14 +72,14 @@ public class MovingBlockManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                ////debug.Log("Hello");
+
                 playerController.canMoveGlobalCount++;
                 MovementVertical(playerController.moveAmount);
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
-                ////debug.Log("Hello");
+
                 playerController.canMoveGlobalCount++;
                 MovementVertical(-playerController.moveAmount);
             }
@@ -95,29 +94,15 @@ public class MovingBlockManager : MonoBehaviour
                     && (Physics2D.OverlapPoint(transform.position + new Vector3(moveAmount, 0f, 0f), playerController.movingBlock)
                         || Physics2D.OverlapPoint(transform.position + new Vector3(moveAmount * 2, 0f, 0f), playerController.goalMask))))
             {
-                //moveToPoint.position += new Vector3(moveAmount, 0f, 0f);
 
-                //debug.Log("CAN MOVE");
 
-                //playerController.canMoveGlobal = true;
                 canMove = true;
-                //rightPlayAudio = true;
             }
         }
         else
         {
             canMove = false;
-
-            //debug.Log("CANNOT MOVE");
-
-            //playerController.canMoveGlobal = false;
         }
-
-        //SlidingBlocksHorizontal(moveAmount, moveAmount);
-
-        //SwapTiles();
-
-        //MovingBlock(true, moveAmount);
 
         checkDone = true;
     }
@@ -130,38 +115,20 @@ public class MovingBlockManager : MonoBehaviour
                     && (Physics2D.OverlapPoint(transform.position + new Vector3(0f, moveAmount * 2, 0f), playerController.whatStopsMovement1)
                         || Physics2D.OverlapPoint(transform.position + new Vector3(0f, moveAmount * 2, 0f), playerController.goalMask))))
             {
-                //moveToPoint.position += new Vector3(0f, moveAmount, 0f);
-
-                //debug.Log("CAN MOVE");
-
-                //rightPlayAudio = true;
-
-                //playerController.canMoveGlobal = true;
                 canMove = true;
             }
         }
         else
         {
-            //debug.Log("CANNOT MOVE");
-
-            //playerController.canMoveGlobal = false;
 
             canMove = false;
         }
-
-        //SlidingBlocksVertical(moveAmount, moveAmount);
-
-        //SwapTiles();
-
-        //MovingBlock(false, moveAmount);
 
         checkDone = true;
     }
 
     public void DestroyBlock()
     {
-        //Transform firstChild = GameObject.Find("MovingBlock").transform.GetChild(0);
-
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         Transform firstChild = this.gameObject.transform.Find("Moving Block");

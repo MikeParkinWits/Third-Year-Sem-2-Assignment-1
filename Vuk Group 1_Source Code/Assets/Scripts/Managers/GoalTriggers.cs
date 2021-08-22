@@ -17,25 +17,9 @@ public class GoalTriggers : MonoBehaviour
         inGoal = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-            GoalChecker();
-
-            //Rotation();
-        
-    }
-
-    public void GoalChecker()
-    {
-
-        
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //debug.Log("COLLIDE");
         if (collision.tag != "Untagged")
         {
             inGoal = true;
