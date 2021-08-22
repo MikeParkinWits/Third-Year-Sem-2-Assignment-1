@@ -63,12 +63,6 @@ public class GoalManager : MonoBehaviour
     public void GoalChecker()
     {
 
-        //Debug.Log("Player In Goal: " + playerInGoal);
-
-        //Debug.Log("Player In Goal Check: " + playerInGoalCheck);
-
-        //Debug.Log("Goal Checked " + goalChecked);
-
         for (int i = 0; i < goalTrigger.Count; i++)
         {
 
@@ -87,26 +81,17 @@ public class GoalManager : MonoBehaviour
 
             for (int i = 0; i < goalTrigger.Count; i++)
             {
-
-                ////debug.Log(i + "" + goalTrigger[i].inGoal);
-
-                ////debug.Log("GOAL: " + goalTrigger[i].inGoal);
-                ///
                 Debug.Log(i + " IN GOALED" + goalTrigger[i].inGoal);
 
 
                 if (goalTrigger[i].inGoal == false && playerInGoal)
                 {
                     playerInGoal = false;
-                    ////debug.Log("FALSE GOAL " + goalTrigger[i].inGoal);
-                    ///
-                    //Debug.Log("YEAH");
 
                     Debug.Log(i + " IN GOAL" + playerInGoal);
 
                     if (!PlayerObserver.wrongShapeAudioPlayed)
                     {
-                        //AudioManager.wrongGoalShapeAudio.Play();
                         PlayerObserver.wrongShapeAudioPlayed = true;
 
                     }
@@ -123,14 +108,6 @@ public class GoalManager : MonoBehaviour
             }
 
 
-
-            Debug.Log("Player In Goal: " + playerInGoal);
-
-            Debug.Log("Player In Goal Check: " + playerInGoalCheck);
-
-            Debug.Log("Goal Checked " + goalChecked);
-
-
             if (playerInGoalCheck && goalChecked)
             {
                 if (playerInGoal)
@@ -139,12 +116,8 @@ public class GoalManager : MonoBehaviour
 
                     playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-                    Debug.Log(playerController.movingBlockArray.Count + 1 + " YAY " + goalTrigger.Count);
-
                     if (playerController.movingBlockArray.Count + 1 == goalTrigger.Count)
                     {
-                        //debug.Log("WIN!");
-
                         if (!gameManager.levelComplete)
                         {
                             AudioManager.winAudio.Play();
@@ -164,17 +137,12 @@ public class GoalManager : MonoBehaviour
             }
             else
             {
-                //goalChecked = false;
 
             }
 
             if (goalChecked && playerInGoalCheck && !playerInGoal)
             {
-                if (!PlayerObserver.wrongShapeAudioPlayed)
-                {
 
-
-                }
                 playerInGoalCheck = false;
             }
         }

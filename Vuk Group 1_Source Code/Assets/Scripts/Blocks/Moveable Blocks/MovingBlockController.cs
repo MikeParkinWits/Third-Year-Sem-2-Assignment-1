@@ -22,15 +22,8 @@ public class MovingBlockController : MonoBehaviour
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
-        ////debug.Log("INSIDE");
         if (playerObserver.canMove)
         {
             if (collision.tag == "Player" || collision.tag == "MovingBlockCanConnect")
@@ -38,7 +31,7 @@ public class MovingBlockController : MonoBehaviour
                 playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
                 AudioManager.clickAudio.Play();
-                //parentTrans.parent = GameObject.FindGameObjectWithTag("Player").transform;
+
                 parentTrans.parent = collision.transform;
                 playerController.canMoveGlobalTotal++;
 
@@ -51,8 +44,6 @@ public class MovingBlockController : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Level 2 Tutorial Complete", 1);
                 }
-
-                //debug.Log(movingBlockManager.attached);
 
                 if (!playerController.movingBlockArray.Contains(movingBlockManager))
                 {

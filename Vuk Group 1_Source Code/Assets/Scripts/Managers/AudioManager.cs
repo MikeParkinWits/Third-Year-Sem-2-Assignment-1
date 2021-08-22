@@ -18,10 +18,4 @@ public class AudioManager : MonoBehaviour
         playerMovementAudio = audioSources[4];
         winAudio = audioSources[5];
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

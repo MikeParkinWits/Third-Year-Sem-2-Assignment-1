@@ -13,10 +13,6 @@ public class SpikeController : MonoBehaviour
 
     public GameObject particleSystemDeath;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
@@ -28,9 +24,6 @@ public class SpikeController : MonoBehaviour
     {
 
         playerObserver = GameObject.Find("Player Observer").GetComponent<PlayerObserver>();
-        //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        ////debug.Log("COLLIDE");
 
         playerObserver.spikeCanMove = false;
 
@@ -57,8 +50,6 @@ public class SpikeController : MonoBehaviour
 
             Instantiate(particleSystemDeath, new Vector3(currentMovingBlockManager.gameObject.transform.position.x, currentMovingBlockManager.transform.position.y), Quaternion.identity);
 
-                //debug.Log(currentMovingBlockManager);
-
                 currentMovingBlockManager.DestroyBlock();
 
             playerObserver.spikeCanMove = true;
@@ -82,8 +73,6 @@ public class SpikeController : MonoBehaviour
             StartCoroutine(DestroyTester());
         }
 
-        //Destroy(playerController.gameObject);
-
         playerObserver.spikeCanMove = true;
     }
 
@@ -92,11 +81,5 @@ public class SpikeController : MonoBehaviour
         yield return new WaitUntil(() => playerObserver.canMove);
 
         playerController.DestroyBlock();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-
     }
 }
